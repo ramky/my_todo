@@ -39,12 +39,12 @@ describe TodosController do
     end
 
     it "does not create the todo record when the input is invalid" do
-      post :create, todo: { name: "cook" }
+      post :create, todo: { description: "i love cooking" }
       Todo.count.should == 0
     end
 
     it "renders the new template when the input is invalid" do
-      post :create, todo: { name: "cook" }
+      post :create, todo: { description: "i love cooking" }
       response.should render_template :new
     end
   end
