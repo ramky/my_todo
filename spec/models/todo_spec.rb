@@ -7,7 +7,7 @@ describe Todo do
       todo.should be_name_only
     end
 
-    it "returns true if teh description is an empty string" do
+    it "returns true if the description is an empty string" do
       todo = Todo.new(name: "cook dinner", description: "")
       todo.should be_name_only
     end
