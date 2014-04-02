@@ -19,32 +19,38 @@ describe Todo do
   end
 
   describe "#display_text" do
-    it "displays the name when there's no tags" do
-      todo = Todo.create(name: "cook dinner")
-      todo.display_text.should == "cook dinner"
+    let(:todo) { Todo.create(name: "cook dinner") }
+    subject { todo.display_text }
+
+    context "no tags" do
+        it { should == "cook dinner" }
     end
 
-    it "displays the only tag with word 'tag' when there's one tag" do
-      todo = Todo.create(name: "cook dinner")
-      todo.tags.create(name: "home")
-      todo.display_text.should == "cook dinner (tag: home)"
+    context "one tag" do
+      before { todo.tags.create(name: "home") }
+
+      it { should == "cook dinner (tag: home)" }
     end
 
-    it "displays name with multiple tags" do
-      todo = Todo.create(name: "cook dinner")
-      todo.tags.create(name: "home")
-      todo.tags.create(name: "urgent")
-      todo.display_text.should == "cook dinner (tags: home, urgent)"
+    context "multiple tags" do
+      before do
+        todo.tags.create(name: "home")
+        todo.tags.create(name: "urgent")
+      end
+
+      it { should == "cook dinner (tags: home, urgent)" }
     end
 
-    it "display up to four tags" do
-      todo = Todo.create(name: "cook dinner")
-      todo.tags.create(name: "home")
-      todo.tags.create(name: "urgent")
-      todo.tags.create(name: "help")
-      todo.tags.create(name: "book")
-      todo.tags.create(name: "patience")
-      todo.display_text.should == "cook dinner (tags: home, urgent, help, book, more...)"
+    context "more than 4 tags" do
+      before do
+        todo.tags.create(name: "home")
+        todo.tags.create(name: "urgent")
+        todo.tags.create(name: "help")
+        todo.tags.create(name: "book")
+        todo.tags.create(name: "patience")
+      end
+
+      it { should == "cook dinner (tags: home, urgent, help, book, more...)" }
     end
   end
 end
