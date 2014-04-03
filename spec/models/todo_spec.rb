@@ -19,7 +19,7 @@ describe Todo do
   end
 
   describe "#display_text" do
-    let(:todo) { Todo.create(name: "cook dinner") }
+    let(:todo) { Fabricate(:todo) }
     subject { todo.display_text }
 
     context "no tags" do

@@ -48,6 +48,7 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
+    fabrication (2.11.0)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -161,6 +162,7 @@ DEPENDENCIES
   capistrano
   capistrano-rails
   coffee-rails (~> 4.0.0)
+  fabrication
   haml-rails
   html2haml
   jbuilder (~> 1.2)
