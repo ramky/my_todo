@@ -1,7 +1,8 @@
-- @todos.each do |todo|
-  %p
-    %b Name:
-    = todo.name
-    %b Description:
-    = todo.description
-%p= link_to 'New Todo', new_todo_path
+%h1 Todos!
+= my_form_for Todo.new do |f|
+  = f.text_field :name
+  = f.submit "Add Todo"
+%ul
+  - @todos.each do |todo|
+    %li
+      = todo.name
