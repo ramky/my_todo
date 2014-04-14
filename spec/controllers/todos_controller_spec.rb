@@ -47,5 +47,23 @@ describe TodosController do
       post :create, todo: { description: "i love cooking" }
       response.should render_template :new
     end
+
+    context "with inline locations" do
+      it "creates a tag with one location" do
+        post :create, todo: { name: "cook at home" }
+        Tag.all.map(&:name).should == ['location:home']
+      end
+
+      it "creates two tags with two locations" do
+        post :create, todo: { name: "cook at home and work" }
+        Tag.all.map(&:name).should == ['location:home', 'location:work']
+      end
+
+      it "creates multiple tags with 4 locations" do
+        post :create, todo: { name: "cook at home, work, school and library" }
+        Tag.all.map(&:name).should == ['location:home', 'location:work', 'location:school', 'location:library']
+      end
+
+    end
   end
 end

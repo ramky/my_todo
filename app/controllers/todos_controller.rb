@@ -8,7 +8,13 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.new(todo_params)
+    
     if @todo.save
+      location_string = @todo.name.split('at').last.strip
+      locations = location_string.split(/\,|and/).map(&:strip)
+      locations.each do |location|
+        @todo.tags.create(name: "location:#{location}")
+      end
       redirect_to root_path
     else
       render :new
