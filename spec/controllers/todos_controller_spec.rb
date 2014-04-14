@@ -53,20 +53,29 @@ describe TodosController do
       Tag.count.should == 0
     end
 
+    it "does not create tags with at in the title without inline locations" do
+      post :create, todo: { name: "eat an apple" }
+      Tag.count.should == 0
+    end
+
+    it "creates a tag with upcase AT" do
+      post :create, todo: { name: "shop AT the Apple Store" }
+      Tag.all.map(&:name).should == ['location:the Apple Store']
+    end
 
     context "with inline locations" do
       it "creates a tag with one location" do
-        post :create, todo: { name: "cook at home" }
+        post :create, todo: { name: "cook AT home" }
         Tag.all.map(&:name).should == ['location:home']
       end
 
       it "creates two tags with two locations" do
-        post :create, todo: { name: "cook at home and work" }
+        post :create, todo: { name: "cook AT home and work" }
         Tag.all.map(&:name).should == ['location:home', 'location:work']
       end
 
       it "creates multiple tags with 4 locations" do
-        post :create, todo: { name: "cook at home, work, school and library" }
+        post :create, todo: { name: "cook AT home, work, school and library" }
         Tag.all.map(&:name).should == ['location:home', 'location:work', 'location:school', 'location:library']
       end
 

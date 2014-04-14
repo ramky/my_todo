@@ -10,7 +10,7 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
     
     if @todo.save
-      location_string = @todo.name.slice(/.*at(.*)/, 1).try(:strip)
+      location_string = @todo.name.slice(/.*\bAT\b(.*)/, 1).try(:strip)
       if location_string
         locations = location_string.split(/\,|and/).map(&:strip)
         locations.each do |location|
