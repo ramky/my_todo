@@ -10,10 +10,12 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
     
     if @todo.save
-      location_string = @todo.name.split('at').last.strip
-      locations = location_string.split(/\,|and/).map(&:strip)
-      locations.each do |location|
-        @todo.tags.create(name: "location:#{location}")
+      location_string = @todo.name.slice(/.*at(.*)/, 1).try(:strip)
+      if location_string
+        locations = location_string.split(/\,|and/).map(&:strip)
+        locations.each do |location|
+          @todo.tags.create(name: "location:#{location}")
+        end
       end
       redirect_to root_path
     else

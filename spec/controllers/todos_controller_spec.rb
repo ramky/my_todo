@@ -48,6 +48,12 @@ describe TodosController do
       response.should render_template :new
     end
 
+    it "does not create tags without inline locations" do
+      post :create, todo: { name: "cook" }
+      Tag.count.should == 0
+    end
+
+
     context "with inline locations" do
       it "creates a tag with one location" do
         post :create, todo: { name: "cook at home" }
