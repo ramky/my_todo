@@ -14,7 +14,6 @@ gem 'html2haml'
 gem 'fabrication'
 gem 'bootstrap-sass'
 
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -22,4 +21,9 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.0'
+  gem 'pry'
+end
+
+group :test do
+  gem 'capybara'
 end

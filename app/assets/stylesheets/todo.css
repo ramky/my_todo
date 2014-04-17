@@ -1,8 +1,13 @@
 label{
-  width: 400px;
-  float: left;
+  width: 75px;
 }
 
 .error{
   color: red
 }
+
+.content{
+    float: left;
+    margin-left: 20%;
+}
+
