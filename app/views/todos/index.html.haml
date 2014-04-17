@@ -1,4 +1,8 @@
 %h1 Todos!
+%p
+  = 'Hello, ' + current_user.name + ' ( ' 
+  = link_to('Sign Out', sign_out_path) 
+  = ' )'
 = my_form_for Todo.new do |f|
   = f.text_field :name
   = f.submit "Add Todo"

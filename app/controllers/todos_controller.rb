@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  before_filter :require_user
+
   def index
     @todos = Todo.all
   end

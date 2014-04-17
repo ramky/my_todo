@@ -1,0 +1,6 @@
+%h1 Please login
+
+= form_tag sessions_path do
+  Username:
+  = text_field_tag :username
+  = submit_tag "Sign in", class: "btn"

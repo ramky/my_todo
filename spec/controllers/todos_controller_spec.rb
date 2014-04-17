@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe TodosController do
+  before { set_current_user }
+
   describe "GET index" do
     it "sets the @todos variable" do
       cook  = Todo.create(name: "cook", description: "i love cooking")

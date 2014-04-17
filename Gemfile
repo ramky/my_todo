@@ -12,6 +12,8 @@ gem 'capistrano-rails'
 gem 'haml-rails'
 gem 'html2haml'
 gem 'fabrication'
+gem 'bootstrap-sass'
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
