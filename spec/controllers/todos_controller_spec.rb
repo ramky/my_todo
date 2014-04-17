@@ -11,9 +11,14 @@ describe TodosController do
       get :index
       assigns(:todos).should == [cook, sleep]
     end
+
     it "renders the index templates" do
       get :index
       response.should render_template :index
+    end
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :index }
     end
   end
 
@@ -23,9 +28,14 @@ describe TodosController do
       assigns(:todo).should be_new_record
       assigns(:todo).should be_instance_of(Todo)
     end
+
     it "renders the new template" do
       get :new
       response.should render_template :new
+    end
+
+    it_behaves_like "require_sign_in" do
+      let(:action) { get :new }
     end
   end
 
@@ -35,6 +45,7 @@ describe TodosController do
       Todo.first.name.should == "cook"
       Todo.first.description.should == "i love cooking"
     end
+
     it "redirects to the root path when the input is valid" do
       post :create, todo: { name: "cook", description: "i love cooking" }
       response.should redirect_to root_path
@@ -80,7 +91,10 @@ describe TodosController do
         post :create, todo: { name: "cook AT home, work, school and library" }
         Tag.all.map(&:name).should == ['location:home', 'location:work', 'location:school', 'location:library']
       end
+    end
 
+    it_behaves_like "require_sign_in" do
+      let(:action) { post :create }
     end
   end
 end
