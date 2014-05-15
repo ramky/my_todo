@@ -85,13 +85,13 @@ describe TodosController do
       it "sends to the right recipient" do
         post :create, todo: {name: "shop AT the Apple Store"}
         message = ActionMailer::Base.deliveries.last 
-        message.to.should == ['ramky.iyer@gmail.com']
+        message.to.should == [current_user.email]
       end
 
       it "has the right content" do
         post :create, todo: {name: "shop AT the Apple Store"}
         message = ActionMailer::Base.deliveries.last 
-        message.body.should include('shop AT the Apple Store'
+        message.body.should include('shop AT the Apple Store')
       end
     end
 
