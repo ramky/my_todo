@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417163659) do
+ActiveRecord::Schema.define(version: 20140515195954) do
 
   create_table "taggings", force: true do |t|
     t.integer  "todo_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140417163659) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.string   "email"
   end
 
 end
