@@ -76,6 +76,25 @@ describe TodosController do
       Tag.all.map(&:name).should == ['location:the Apple Store']
     end
 
+    context "email sending" do
+      it "sends out the email" do
+        post :create, todo: {name: "shop AT the Apple Store"}
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+
+      it "sends to the right recipient" do
+        post :create, todo: {name: "shop AT the Apple Store"}
+        message = ActionMailer::Base.deliveries.last 
+        message.to.should == ['ramky.iyer@gmail.com']
+      end
+
+      it "has the right content" do
+        post :create, todo: {name: "shop AT the Apple Store"}
+        message = ActionMailer::Base.deliveries.last 
+        message.body.should include('shop AT the Apple Store'
+      end
+    end
+
     context "with inline locations" do
       it "creates a tag with one location" do
         post :create, todo: { name: "cook AT home" }
