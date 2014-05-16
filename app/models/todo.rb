@@ -2,6 +2,7 @@ class Todo < ActiveRecord::Base
   has_many :taggings
   has_many :tags, through: :taggings
   validates_presence_of :name
+  before_create :generate_token
 
   def name_only?
     description.blank?
@@ -20,7 +21,10 @@ class Todo < ActiveRecord::Base
     end
   end
 
-private
+  def to_param
+    token
+  end
+
   def tag_text
     if tags.any?
       " (" +
@@ -33,6 +37,7 @@ private
     end
   end
 
+private
   def create_location_tags
     location_string = name.slice(/.*\bAT\b(.*)/, 1).try(:strip)
     if location_string
@@ -41,5 +46,9 @@ private
         tags.create(name: "location:#{location}")
       end
     end
+  end
+
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
   end
 end

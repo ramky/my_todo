@@ -9,4 +9,4 @@
 %ul
   - @todos.each do |todo|
     %li
-      = todo.display_text
+      = link_to todo.display_text, todo

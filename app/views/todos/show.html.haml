@@ -1,6 +1,10 @@
 %p
   %b Name:
   = @todo.name
+  %br
   %b Description:
   = @todo.description
+  %br
+  %b Tag Text:
+  = @todo.tag_text
 %p= link_to 'All Todos', todos_path
