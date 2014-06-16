@@ -1,8 +1,8 @@
 class Todo < ActiveRecord::Base
+  includes Tokenable
   has_many :taggings
   has_many :tags, through: :taggings
   validates_presence_of :name
-  before_create :generate_token
 
   def name_only?
     description.blank?
@@ -46,9 +46,5 @@ private
         tags.create(name: "location:#{location}")
       end
     end
-  end
-
-  def generate_token
-    self.token = SecureRandom.urlsafe_base64
   end
 end
