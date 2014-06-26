@@ -1,5 +1,4 @@
-class TodosController < ApplicationController
-  before_filter :require_user
+class TodosController < AuthenticatedController
 
   def index
     @todos = current_user.todos
