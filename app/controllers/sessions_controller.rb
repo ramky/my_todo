@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     user = User.where(username: params[:username]).first
     if user
       session[:user_id] = user.id
-      redirect_to todos_path
+      redirect_to current_user.admin? ? admin_todos_path : todos_path
     else
       flash[:error] = "This application is invite only."
       redirect_to front_page_path

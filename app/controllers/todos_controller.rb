@@ -2,16 +2,17 @@ class TodosController < ApplicationController
   before_filter :require_user
 
   def index
-    @todos = Todo.all
+    @todos = current_user.todos
   end
+
   def new
     @todo = Todo.new
   end
 
   def create
     @todo = Todo.new(todo_params)
-    
-    if @todo.save_with_tags
+
+    if @todo.save_with_tags(current_user)
       AppMailer.notify_on_new_todo(current_user, @todo).deliver
       redirect_to root_path
     else

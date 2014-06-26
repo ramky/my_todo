@@ -1,0 +1,11 @@
+%h1 Todos!
+%p
+  = 'Hello, ' + current_user.name + ' ( ' 
+  = link_to('Sign Out', sign_out_path) 
+  = ' )'
+%ul
+  - @todos.each do |todo|
+    %li
+      = link_to todo.display_text, todo
+      \-
+      %span= todo.user.name

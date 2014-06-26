@@ -1,8 +1,9 @@
 class Todo < ActiveRecord::Base
-  includes Tokenable
+  include Tokenable
   has_many :taggings
   has_many :tags, through: :taggings
   validates_presence_of :name
+  belongs_to :user
 
   def name_only?
     description.blank?
@@ -12,7 +13,8 @@ class Todo < ActiveRecord::Base
     name + tag_text
   end
 
-  def save_with_tags
+  def save_with_tags(user)
+    self.user = user
     if save
       create_location_tags
       true
