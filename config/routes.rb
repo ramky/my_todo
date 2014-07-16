@@ -3,6 +3,8 @@ MyTodo::Application.routes.draw do
     resources :tags, only: [:create]
   end
 
+  resources :payments, only: [:new, :create]
+
   namespace :admin do
     resources :todos, only: [:index]
   end
