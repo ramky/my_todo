@@ -1,5 +1,9 @@
 label{
-  width: 75px;
+  width: 200px;
+}
+
+.my_label{
+  display: block;
 }
 
 .error{

@@ -1,5 +1,20 @@
-%h1 Todos!
+= content_for :head do
+  %script(type="text/javascript" src="https://js.stripe.com/v2/")
+  :javascript
+    Stripe.setPublishableKey('pk_test_4NbXAB02BkDybgtM3SEbKsRN');
+  = javascript_include_tag 'payments'
 %p Thank you for your support.
 
-= form_tag payments_path do
-  %script(src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_4NbXAB02BkDybgtM3SEbKsRN" data-amount="3000" data-name="Support todo app" data-description="Thanks you for your donation for todo app")
+= form_tag payments_path, id: 'payment-form' do
+  -# %script(src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_4NbXAB02BkDybgtM3SEbKsRN" data-amount="3000" data-name="Support todo app" data-description="Thanks you for your donation for todo app")
+  %fieldset
+    %span.payment-errors
+    %label.my_label Credit Card Number
+    %input.span3.card-number(type='text')
+    %label.my_label Security Code
+    %input.span3.card-cvc(type='text')
+    %label.my_label Expiration
+    = select_month(Date.today, {add_month_numbers: true}, name: nil, class: 'span2 card-expiry-month')
+    = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, class: 'span2 card-expiry-year')
+  %fieldset.actions
+    = submit_tag 'Submit Payments', class: 'btn payment_submit'
