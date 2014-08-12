@@ -15,7 +15,7 @@ $(function() {
     var $form = $('#payment-form');
 
     if (response.error) {
-      $form.find('.payment-errors').text(response.error.message);
+      //$form.find('.payment-errors').text(response.error.message);
       $form.find('.payment-submit').prop('disabled', false);
     } else {
       var token = response.id;
