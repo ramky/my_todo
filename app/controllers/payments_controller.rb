@@ -1,20 +1,16 @@
 class PaymentsController < ApplicationController
   def create
-    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
-
     token = params[:stripeToken]
 
-    begin
-      charge = Stripe::Charge.create(
-        :amount => 3000, # amount in cents, again
-        :currency => "usd",
-        :card => token,
-        :description => 'thank you for your donation to todo app'
-      )
+    charge = StripeWrapper::Charge.create(
+      :amount => 3000,
+      :card => token,
+    )
+    if charge.successful?
       flash[:success] = 'Thank you for your generous support.'
       redirect_to new_payment_path
-    rescue Stripe::CardError => e
-      flash[:error] = e.message
+    else
+      flash[:error] = charge.error_message
       redirect_to new_payment_path
     end
   end
