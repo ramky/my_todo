@@ -5,8 +5,8 @@ describe TodosController do
 
   describe "GET index" do
     it "sets the @todos variable" do
-      cook  = Todo.create(name: "cook", description: "i love cooking")
-      sleep = Todo.create(name: "sleep", description: "i love sleeping")
+      cook  = Todo.create(name: "cook", description: "i love cooking", user: current_user)
+      sleep = Todo.create(name: "sleep", description: "i love sleeping", user: current_user)
 
       get :index
       assigns(:todos).should == [cook, sleep]

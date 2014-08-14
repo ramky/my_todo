@@ -21,7 +21,7 @@ describe StripeWrapper::Charge do
     let(:response){
       StripeWrapper::Charge.create(amount: 300, card: token)
     }
-    it "charges the card successfully" do
+    it "charges the card successfully", :vcr do
        response.should be_successful
      end
   end
@@ -32,11 +32,11 @@ describe StripeWrapper::Charge do
       StripeWrapper::Charge.create(amount: 300, card: token)
     }
 
-    it "does not charge the card successfully" do
+    it "does not charge the card successfully", :vcr do
       response.should_not be_successful
     end
 
-    it "contains an error message" do
+    it "contains an error message", :vcr do
       response.error_message.should == 'Your card was declined.'
     end
   end
