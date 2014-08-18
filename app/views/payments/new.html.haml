@@ -9,10 +9,10 @@
   -# %script(src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_4NbXAB02BkDybgtM3SEbKsRN" data-amount="3000" data-name="Support todo app" data-description="Thanks you for your donation for todo app")
   %fieldset
     %span.payment-errors
-    %label.my_label Credit Card Number
-    %input.span3.card-number(type='text')
-    %label.my_label Security Code
-    %input.span3.card-cvc(type='text')
+    %label.my_label(for="credit-card-number") Credit Card Number
+    %input#credit-card-number.span3.card-number(type='text')
+    %label.my_label(for="security-code") Security Code
+    %input#security-code.span3.card-cvc(type='text')
     %label.my_label Expiration
     = select_month(Date.today, {add_month_numbers: true}, name: nil, class: 'span2 card-expiry-month')
     = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, class: 'span2 card-expiry-year')

@@ -6,6 +6,9 @@ require 'rspec/autorun'
 require 'capybara/rails'
 require 'vcr'
 
+Capybara.server_host = 'localhost'
+Capybara.server_port = '3000'
+
 #G Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
@@ -48,4 +51,5 @@ VCR.configure do |c|
   c.cassette_library_dir = "#{::Rails.root}/spec/fixtures/vcr_cassettes"
   c.hook_into :webmock
   c.configure_rspec_metadata!
+  c.ignore_localhost = true
 end
