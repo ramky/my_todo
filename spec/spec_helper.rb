@@ -8,6 +8,7 @@ require 'vcr'
 
 Capybara.server_host = 'localhost'
 Capybara.server_port = '3000'
+Capybara.javascript_driver = :webkit
 
 #G Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

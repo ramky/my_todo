@@ -5,7 +5,7 @@ feature "Visitor makes payment", { vcr: true, js: true } do
     visit new_payment_path
   end
 
-  scenario "valid card number" do
+  scenario "valid card number", driver: :selenium do
     pay_with_credit_card('4242424242424242')
     page.should have_content 'Thank you for your generous support'
   end
